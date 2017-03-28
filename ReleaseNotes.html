@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="ReleaseNotes%20Archivos/ReleaseNotes.css">
+<link rel="stylesheet" href="styles/ReleaseNotes.css">
 </head>
 <body class="details">
 <div class="links">
@@ -20,7 +20,7 @@
 
 <h2>Introduction</h2>
 
-<p>These release notes describe issues specific to the Git for Windows 
+<p>These release notes describe issues specific to the Git for Windows
 release. The release notes covering the history of the core git commands
  can be found <a href="https://github.com/git/git/tree/master/Documentation/RelNotes">in the Git project</a>.</p>
 
@@ -29,11 +29,11 @@ release. The release notes covering the history of the core git commands
 <h1>Known issues</h1>
 
 <ul>
-<li>Special permissions (and Windows Vista or later) are required when 
+<li>Special permissions (and Windows Vista or later) are required when
 cloning repositories with symbolic links, therefore support for symbolic
  links is disabled by default. Use <code>git clone -c core.symlinks=true &lt;URL&gt;</code> to enable it, see details <a href="https://github.com/git-for-windows/git/wiki/Symbolic-Links">here</a>.</li>
 <li>If configured to use Plink, you will have to connect with <a href="http://www.chiark.greenend.org.uk/%7Esgtatham/putty/">putty</a> first and accept the host key.</li>
-<li>Some console programs, most notably non-MSYS2 Python, PHP, Node and 
+<li>Some console programs, most notably non-MSYS2 Python, PHP, Node and
 OpenSSL, interact correctly with MinTTY only when called through <code>winpty</code> (e.g. the Python console needs to be started as <code>winpty python</code> instead of just <code>python</code>).</li>
 <li><a href="http://curl.haxx.se/">cURL</a> uses <code>$HOME/_netrc</code> instead of <code>$HOME/.netrc</code>.</li>
 <li><p>If you specify command-line options starting with a slash, POSIX-to-Windows path conversion will kick in converting e.g. "<code>/usr/bin/bash.exe</code>" to "<code>C:\Program Files\Git\usr\bin\bash.exe</code>". When that is not desired -- e.g. "<code>--upload-pack=/opt/git/bin/git-upload-pack</code>" or "<code>-L/regex/</code>" -- you need to set the environment variable <code>MSYS_NO_PATHCONV</code> temporarily, like so:</p>
@@ -44,15 +44,15 @@ OpenSSL, interact correctly with MinTTY only when called through <code>winpty</c
 
 <p>Alternatively, you can double the first slash to avoid POSIX-to-Windows path conversion, e.g. "<code>//usr/bin/bash.exe</code>".</p></li>
 <li>Windows drives are normally recognised within the POSIX path as <code>/c/path/to/dir/</code> where <code>/c/</code> (or appropriate drive letter) is equivalent to the <code>C:\</code> Windows prefix to the <code>\path\to\dir</code>. If this is not recoginsed, revert to the <code>C:\path\to\dir</code> Windows style.</li>
-<li>Git for Windows will not allow commits containing DOS-style 
+<li>Git for Windows will not allow commits containing DOS-style
 truncated 8.3-format filenames ending with a tilde and digit, such as <code>mydocu~1.txt</code>. A workaround is to call <code>git config core.protectNTFS false</code>, which is not advised. Instead, add a rule to .gitignore to ignore the file(s), or rename the file(s).</li>
 <li>Many Windows programs (including the Windows Explorer) have problems
- with directory trees nested so deeply that the absolute path is longer 
-than 260 characters. Therefore, Git for Windows refuses to check out 
+ with directory trees nested so deeply that the absolute path is longer
+than 260 characters. Therefore, Git for Windows refuses to check out
 such files by default. You can overrule this default by setting <code>core.longPaths</code>, e.g. <code>git clone -c core.longPaths=true ...</code>.</li>
 <li>Some commands are not yet supported on Windows and excluded from the installation.</li>
 <li>As Git for Windows is shipped without Python support, all Git commands requiring Python are not yet supported; e.g. <code>git p4</code>.</li>
-<li>The Quick Launch icon will only be installed for the user running 
+<li>The Quick Launch icon will only be installed for the user running
 setup (typically the Administrator). This is a technical restriction and
  will not change.</li>
 </ul>
@@ -65,10 +65,10 @@ setup (typically the Administrator). This is a technical restriction and
 
 <p>Git for Windows also contains Embedded CAcert Root Certificates. For more information please go to <a href="https://www.cacert.org/policy/RootDistributionLicense.php">https://www.cacert.org/policy/RootDistributionLicense.php</a>.</p>
 
-<p>This package contains software from a number of other projects 
-including Bash, zlib, curl, msmtp, tcl/tk, perl, MSYS2 and a number of 
-libraries and utilities from the GNU project, licensed under the GNU 
-General Public License. Likewise, it contains Perl which is dual 
+<p>This package contains software from a number of other projects
+including Bash, zlib, curl, msmtp, tcl/tk, perl, MSYS2 and a number of
+libraries and utilities from the GNU project, licensed under the GNU
+General Public License. Likewise, it contains Perl which is dual
 licensed under the GNU General Public License and the Artistic License.</p>
 
 <h2>Changes since Git for Windows v2.12.0 (February 25th 2017)</h2>
@@ -293,7 +293,7 @@ licensed under the GNU General Public License and the Artistic License.</p>
 <li>Comes with <a href="https://github.com/git/git/blob/v2.9.3/Documentation/RelNotes/2.9.3.txt">Git 2.9.3</a>.</li>
 <li>Updated Git Credential Manager to <a href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/tag/v.1.6.0">version 1.6.0</a>.</li>
 <li>Includes support for <code>git status --porcelain=v2</code>.</li>
-<li>Avoids evaluating unnecessary patch IDs when determining which 
+<li>Avoids evaluating unnecessary patch IDs when determining which
 commits do not need to be rebased because they are already upstream.</li>
 <li>Sports a new <code>--smudge</code> option for <code>git cat-file</code> that lets it pass blob contents through smudge filters configured for the specified path.</li>
 </ul>
@@ -603,7 +603,7 @@ commits do not need to be rebased because they are already upstream.</li>
 
 <ul>
 <li>The <code>PATH</code> variable <a href="https://github.com/git-for-windows/git/issues/438">is now really left alone</a> when choosing the <em>"Use Git from Git Bash only"</em>
- option in the installer. Note that upgrading Git for Windows will call 
+ option in the installer. Note that upgrading Git for Windows will call
 the previous version's uninstaller, which might still have that bug.</li>
 <li>Git GUI's <em>Registry&gt;Create Desktop Icon</em> <a href="https://github.com/git-for-windows/git/issues/448">now generates correct shortcuts</a>.</li>
 <li>The <code>antiword</code> utility to render Word documents for use in <code>git diff</code> <a href="https://github.com/git-for-windows/git/issues/453">now works correctly</a>.</li>
@@ -662,7 +662,7 @@ the previous version's uninstaller, which might still have that bug.</li>
 <li>The documentation <a href="https://github.com/git-for-windows/git/issues/404">no longer shows plain-text <code>linkgit:...</code> "links"</a> but proper hyperlinks instead.</li>
 <li>The <code>mtab</code> link <a href="https://github.com/git-for-windows/git/issues/405">is written to <code>/etc/mtab</code> again, as it should</a>.</li>
 <li>When run inside the PowerShell, Git no longer gets confused when the
- current directory's path and what is recorded in the file system 
+ current directory's path and what is recorded in the file system
 differs in case (e.g. "GIT/" vs "Git/").</li>
 </ul>
 
@@ -801,7 +801,7 @@ differs in case (e.g. "GIT/" vs "Git/").</li>
 <li><code>clear.exe</code> and the cursor keys in vi <a href="https://github.com/git-for-windows/git/issues/169">work again</a> when Git Bash is run in Windows' default console window ("ConHost").</li>
 <li>The ACLs of the user's temporary directory are no longer modified when mounting <code>/tmp/</code> (https://github.com/git-for-windows/git/issues/190).</li>
 <li><em>Git Bash Here</em> works even from the context menu of the empty
- area in Windows Explorer's view of C:\, D:\, etc 
+ area in Windows Explorer's view of C:\, D:\, etc
 (https://github.com/git-for-windows/git/issues/176).</li>
 </ul>
 
@@ -842,7 +842,7 @@ differs in case (e.g. "GIT/" vs "Git/").</li>
 
 <ul>
 <li>The <code>.sh</code> file association was fixed</li>
-<li>The installer will now remove files from a previous Git for Windows 
+<li>The installer will now remove files from a previous Git for Windows
 versions, particularly important for 32-bit -&gt; 64-bit upgrades</li>
 </ul>
 
@@ -900,7 +900,7 @@ versions, particularly important for 32-bit -&gt; 64-bit upgrades</li>
 <li>Fixed encoding issues in Git Bash and keept the TMP environment variable intact.</li>
 <li>Downgraded the <code>nettle</code> packages due to an <a href="https://github.com/Alexpux/MINGW-packages/issues/549"><em>MSYS2</em> issue</a></li>
 <li>A couple of fixes to the Windows-specific Git wrapper</li>
-<li>Git wrapper now refuses to use <code>$HOMEDRIVE$HOMEPATH</code> if 
+<li>Git wrapper now refuses to use <code>$HOMEDRIVE$HOMEPATH</code> if
 it points to a non-existing directory (this can happen if it points to a
  network drive that just so happens to be Disconnected Right Now).</li>
 <li>Much smoother interaction with the <code>mintty</code> terminal emulator</li>
@@ -1043,7 +1043,7 @@ it points to a non-existing directory (this can happen if it points to a
 <li>Compile warning fix in config.c (PR #159).</li>
 <li>Ships with actual dos2unix and unix2dos.</li>
 <li>The installer no longer recommends mixing with Cygwin.</li>
-<li>Fixes a regression in Git-Cheetah which froze the Explorer upon 
+<li>Fixes a regression in Git-Cheetah which froze the Explorer upon
 calling Git Bash from the context menu (Git-Cheetah PRs #14 and #15).</li>
 </ul>
 
@@ -1074,8 +1074,8 @@ calling Git Bash from the context menu (Git-Cheetah PRs #14 and #15).</li>
 
 <ul>
 <li>Comes with Git 1.8.5.2 plus Windows-specific patches.</li>
-<li>Windows-specific patches are now grouped into pseudo-branches which 
-should make future development robust despite slow uptake of the 
+<li>Windows-specific patches are now grouped into pseudo-branches which
+should make future development robust despite slow uptake of the
 Windows-specific patches by upstream git.git.</li>
 <li>Works around more path length limitations (pull request #86)</li>
 <li>Has an optional <code>stat()</code> cache toggled via <code>core.fscache</code> (pull request #107)</li>
@@ -1136,8 +1136,8 @@ Windows-specific patches by upstream git.git.</li>
 
 <ul>
 <li>Comes with Git 1.8.1.2 plus Windows specific patches.</li>
-<li>Includes support for using the Windows Credential API to store 
-access credentials securely and provide access via the control panel 
+<li>Includes support for using the Windows Credential API to store
+access credentials securely and provide access via the control panel
 tool to manage git credentials.</li>
 <li>Rebase autosquash support is now enabled by default. See <a href="http://goo.gl/2kwKJ">http://goo.gl/2kwKJ</a> for some suggestions on using this.</li>
 <li>All msysGit development is now done on 'master' and the devel branches are deleted.</li>
@@ -1235,7 +1235,7 @@ tool to manage git credentials.</li>
 <li>Please refer to the release notes for official Git 1.7.10.</li>
 <li>Clarifications in the installer.</li>
 <li>Console output is now even thread-safer.</li>
-<li>Better support for foreign remotes (Mercurial remotes are disabled 
+<li>Better support for foreign remotes (Mercurial remotes are disabled
 for now, due to lack of a Python version that can be compiled within the
  development environment).</li>
 <li>Git Cheetah no longer writes big log files directly to <code>C:\</code>.</li>
@@ -1447,12 +1447,12 @@ for now, due to lack of a Python version that can be compiled within the
 <li>Git no longer complains about an unset <code>RUNTIME_PREFIX</code> (thanks Johannes Sixt).</li>
 <li><code>git gui</code> can Explore Working Copy on Windows again (thanks Markus Heidelberg).</li>
 <li><code>git gui</code> can create shortcuts again (fixes issue 425, thanks Heiko Voigt).</li>
-<li>When <code>git checkout</code> cannot overwrite files because they 
-are in use, it will offer to try again, giving the user a chance to 
+<li>When <code>git checkout</code> cannot overwrite files because they
+are in use, it will offer to try again, giving the user a chance to
 release the file (thanks Heiko Voigt).</li>
 <li>Ctrl+W will close <code>gitk</code> (thanks Jens Lehmann).</li>
-<li><code>git gui</code> no longer binds Ctrl+C, which caused problems 
-when trying to use said shortcut for the clipboard operation "Copy" 
+<li><code>git gui</code> no longer binds Ctrl+C, which caused problems
+when trying to use said shortcut for the clipboard operation "Copy"
 (fixes issue 423, thanks Pat Thoyts).</li>
 <li><code>gitk</code> does not give up when the command line length limit is reached (issue 387).</li>
 <li>The exit code is fixed when <code>Git.cmd</code> is called from <code>cmd.exe</code> (thanks Alexey Borzenkov).</li>
@@ -1474,14 +1474,14 @@ when trying to use said shortcut for the clipboard operation "Copy"
 <ul>
 <li>Comes with official git 1.6.5.1.</li>
 <li>Thanks to Johan 't Hart, files and directories starting with a single dot (such as <code>.git</code>) will now be marked hidden (you can disable this setting with core.hideDotFiles=false in your config) (Issue 288).</li>
-<li>Thanks to Thorvald Natvig, Git on Windows can simulate symbolic 
-links by using reparse points when available.  For technical reasons, 
+<li>Thanks to Thorvald Natvig, Git on Windows can simulate symbolic
+links by using reparse points when available.  For technical reasons,
 this only works for symbolic links pointing to files, not directories.</li>
-<li>A lot of work has been put into making it possible to compile Git's 
-source code (the part written in C, of course, not the scripts) with 
+<li>A lot of work has been put into making it possible to compile Git's
+source code (the part written in C, of course, not the scripts) with
 Microsoft Visual Studio.  This work is ongoing.</li>
-<li>Thanks to Sebastian Schuberth, we only offer the (Tortoise)Plink 
-option in the installer if the presence of Plink was detected and at 
+<li>Thanks to Sebastian Schuberth, we only offer the (Tortoise)Plink
+option in the installer if the presence of Plink was detected and at
 least one Putty session was found..</li>
 <li>Thanks to Sebastian Schuberth, the installer has a nicer icon now.</li>
 <li>Some more work by Sebastian Schuberth was done on better integration of Plink (Issues 305 &amp; 319).</li>
@@ -1554,12 +1554,12 @@ least one Putty session was found..</li>
 <li>Portable Git is now shipped as a <code>.7z</code>; it still is a self-extracting archive if you rename it to <code>.exe</code>.</li>
 <li>Git includes the Perl Encode module now.</li>
 <li>Git now includes the <code>filter-branch</code> tool.</li>
-<li>There is a workaround for a Windows 7 regression triggering a crash 
-in the progress reporting (e.g. during a clone). This fixes issues 236 
+<li>There is a workaround for a Windows 7 regression triggering a crash
+in the progress reporting (e.g. during a clone). This fixes issues 236
 and 247.</li>
 <li><code>gitk</code> tries not to crash when it is closed while reading references (Issue 125, thanks Pat Thoyts).</li>
-<li>In some setups, hard-linking is not as reliable as it should be, so 
-we have a workaround which avoids hard links in some situations (Issues 
+<li>In some setups, hard-linking is not as reliable as it should be, so
+we have a workaround which avoids hard links in some situations (Issues
 222 and 229).</li>
 <li><code>git-svn</code> sets <code>core.autocrlf</code> to <code>false</code> now, hopefully shutting up most of the <code>git-svn</code> reports.</li>
 </ul>
@@ -1579,11 +1579,11 @@ we have a workaround which avoids hard links in some situations (Issues
 <h3>Bugfixes</h3>
 
 <ul>
-<li>Renaming was made more robust (due to Explorer or some virus 
+<li>Renaming was made more robust (due to Explorer or some virus
 scanners, files could not be renamed at the first try, so we have to try
  multiple times).</li>
-<li>Johannes Sixt made lots of changes to the test-suite to identify 
-properly which tests should pass, and which ones cannot pass due to 
+<li>Johannes Sixt made lots of changes to the test-suite to identify
+properly which tests should pass, and which ones cannot pass due to
 limitations of the platform.</li>
 <li>Support <code>PAGER</code>s with spaces in their filename.</li>
 <li>Quite a few changes were undone which we needed in the olden days of msysGit.</li>
@@ -1716,11 +1716,11 @@ limitations of the platform.</li>
 
 <ul>
 <li>Comes with official git 1.5.5.</li>
-<li><code>core.autocrlf</code> is enabled (<code>true</code>) by 
-default. This means git converts to Windows line endings (CRLF) during 
-checkout and converts to Unix line endings (LF) during commit. This is 
-the right choice for cross-platform projects. If the conversion is not 
-reversible, git warns the user. The installer warns about the new 
+<li><code>core.autocrlf</code> is enabled (<code>true</code>) by
+default. This means git converts to Windows line endings (CRLF) during
+checkout and converts to Unix line endings (LF) during commit. This is
+the right choice for cross-platform projects. If the conversion is not
+reversible, git warns the user. The installer warns about the new
 default before the installation starts.</li>
 <li>The user does no longer have to "accept" the GPL but only needs to press "continue".</li>
 <li>Installer deletes shell scripts that have been replaced by builtins. Upgrading should be safer.</li>
@@ -1767,13 +1767,13 @@ default before the installation starts.</li>
 
 <ul>
 <li><code>pull</code>/<code>fetch</code>/<code>push</code> in <code>git-gui</code> works. Note, there is no way for <code>ssh</code>
- to ask for a passphrase or for confirmation if you connect to an 
-unknown host. So, you must have ssh set up to work without passphrase. 
-Either you have a key without passphrase, or you started ssh-agent. You 
+ to ask for a passphrase or for confirmation if you connect to an
+unknown host. So, you must have ssh set up to work without passphrase.
+Either you have a key without passphrase, or you started ssh-agent. You
 may also consider using PuTTY by pointing <code>GIT_SSH</code> to <code>plink.exe</code>
- and handle your ssh keys with Pageant. In this case you should include 
-your login name in urls. You must also connect to an unknown host once 
-from the command line and confirm the host key, before you can use it 
+ and handle your ssh keys with Pageant. In this case you should include
+your login name in urls. You must also connect to an unknown host once
+from the command line and confirm the host key, before you can use it
 from <code>git-gui</code>.</li>
 </ul>
 
@@ -1807,8 +1807,8 @@ from <code>git-gui</code>.</li>
 <h2>Changes since WinGit-0.2-alpha</h2>
 
 <ul>
-<li>The history of the release notes stops here. Various new features 
-and bugfixes are available since WinGit-0.2-alpha. Please check the git 
+<li>The history of the release notes stops here. Various new features
+and bugfixes are available since WinGit-0.2-alpha. Please check the git
 history of the msysgit project for details.</li>
 </ul>
 </div>
